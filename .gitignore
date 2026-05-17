@@ -1,0 +1,54 @@
+# macOS
+.DS_Store
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# IDE/editor
+.idea/
+.vscode/
+
+# C/C++ build outputs
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+*.o
+*.out
+*.exe
+01_Programming/Cplusplus/cout
+01_Programming/Cplusplus/if语句
+01_Programming/Cplusplus/jicheng
+01_Programming/Cplusplus/learn
+01_Programming/Cplusplus/protect
+01_Programming/Cplusplus/test
+01_Programming/Cplusplus/语句
+
+# Machine learning artifacts
+runs/
+datasets/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+
+# Large media generated or used by experiments
+*.mp4
+*.MP4
+*.mov
+*.avi
+
+# Third-party cloned repositories
+ultralytics_examples/
