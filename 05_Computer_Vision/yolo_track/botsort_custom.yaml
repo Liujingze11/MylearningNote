@@ -1,0 +1,40 @@
+# BoT-SORT custom tracker for YOLO Segment tracking
+
+tracker_type: botsort
+
+# 第一阶段匹配阈值
+track_high_thresh: 0.25
+
+# 第二阶段低置信度匹配阈值
+track_low_thresh: 0.10
+
+# 新建轨迹阈值
+new_track_thresh: 0.25
+
+# 重点：调大 track_buffer
+# 25 FPS 下：
+# 150 帧约等于 6 秒
+# 300 帧约等于 12 秒
+track_buffer: 150
+
+# 匹配阈值，越大匹配越宽松
+match_thresh: 0.80
+
+# 是否融合检测置信度
+fuse_score: True
+
+# BoT-SORT 的全局运动补偿
+# 如果你的视频是固定摄像头，可以考虑改成 none
+# 如果摄像头有移动，保留 sparseOptFlow
+gmc_method: sparseOptFlow
+
+# ReID 相关参数
+proximity_thresh: 0.50
+appearance_thresh: 0.80
+
+# 重点：打开 ReID
+with_reid: True
+
+# ReID模型
+# auto 表示优先使用 YOLO 自身特征，速度更快
+model: yolov8n-cls.pt
