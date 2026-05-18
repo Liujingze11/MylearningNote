@@ -49,6 +49,32 @@ datasets/
 *.MP4
 *.mov
 *.avi
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.webp
+*.tiff
+*.tif
+
+# Pretrained model files (HuggingFace etc.)
+*.bin
+*.safetensors
+*.ckpt
+*.h5
+*.keras
+
+# Compressed archives
+*.zip
+*.tar.gz
+
+# ML experiment outputs
+**/experiments/
+**/frames/
+**/output/
 
 # Third-party cloned repositories
 ultralytics_examples/
+YOLOX/
+**/bert-base-uncased/
