@@ -78,3 +78,10 @@ datasets/
 ultralytics_examples/
 YOLOX/
 **/bert-base-uncased/
+
+# Nested git repositories (keep local clone history, don't track)
+.git/
+
+# FoundationPose runtime outputs (debug dumps / cmake build)
+07_AI_Robot/FoundationPose/FoundationPose/debug/
+07_AI_Robot/FoundationPose/FoundationPose/mycpp/build/
