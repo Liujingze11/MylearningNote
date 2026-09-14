@@ -1,0 +1,23 @@
+Ghostty 最常用快捷键
+===================
+
+| 快捷键 | 作用 |
+|---|---|
+| Ctrl + Shift + O | 右侧新建分屏 |
+| Ctrl + Shift + E | 下方新建分屏 |
+| Ctrl + Alt + 方向键 | 切换分屏 |
+| Ctrl + Shift + Enter | 放大 / 还原当前分屏 |
+| Ctrl + Shift + T | 新建标签页 |
+| Ctrl + Tab | 下一个标签页 |
+| Ctrl + Shift + Tab | 上一个标签页 |
+| Ctrl + Shift + C | 复制 |
+| Ctrl + Shift + V | 粘贴 |
+| Ctrl + Shift + F | 搜索终端内容 |
+| Ctrl + Shift + P | 打开 / 关闭命令面板 |
+| Ctrl + , | 打开配置文件 |
+| Ctrl + Shift + , | 重新加载配置 |
+| Ctrl + + 或 Ctrl + = | 增大字体 |
+| Ctrl + - | 减小字体 |
+| Ctrl + 0 | 重置字体大小 |
+| Ctrl + Enter | 全屏 / 退出全屏 |
+| Alt + F4 | 关闭窗口 |

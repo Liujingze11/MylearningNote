@@ -1,0 +1,40 @@
+# 1. 进入 conda 环境
+conda activate claude-code-deepseek
+
+# 2. 确认 claude / npm 是否来自当前 conda 环境
+which claude
+which npm
+npm prefix -g
+npm root -g
+
+# 3. 获取当前 npm 全局 node_modules 路径
+NPM_ROOT="$(npm root -g)"
+
+# 4. 安全检查，避免变量为空时误删
+test -n "$NPM_ROOT" || {
+  echo "ERROR: NPM_ROOT is empty, aborting."
+  exit 1
+}
+
+# 5. 清理 Claude Code 残留和旧安装
+rm -rf "$NPM_ROOT/@anthropic-ai/.claude-code-"*
+rm -rf "$NPM_ROOT/@anthropic-ai/claude-code"
+
+# 如需额外清理你之前指定的残留目录，也可以执行：
+rm -rf /home/ljz/miniconda3/envs/claude-code-deepseek/lib/node_modules/@anthropic-ai/.claude-code-pLnB7FQW
+
+# 6. 校验 npm 缓存
+npm cache verify
+
+# 7. 重新安装：latest 和固定版本二选一
+npm install -g @anthropic-ai/claude-code@latest
+# npm install -g @anthropic-ai/claude-code@2.1.153
+
+# 8. 刷新 shell 命令缓存
+hash -r
+
+# 9. 验证安装结果
+claude --version
+
+# 10. 启动你的 deepseek 包装命令
+claude-deepseek

@@ -1,0 +1,30 @@
+# ISAT-SAM 启动指令
+
+## 软件信息
+- **ISAT-SAM**: 基于 SAM (Segment Anything Model) 的交互式半自动图像分割标注工具
+  - GitHub: https://github.com/yatengLG/ISAT_with_segment_anything
+
+## 插件
+- **ISAT_plugin_auto_annotate**: 基于 YOLO 检测模型的自动标注插件
+  - GitHub: https://github.com/yatengLG/ISAT_plugin_auto_annotate
+  - 依赖: isat-sam, onnxruntime
+
+## 环境安装
+# 1. 创建 conda 环境
+conda create -n isat_env python=3.10 -y
+conda activate isat_env
+
+# 2. 安装 ISAT-SAM
+pip install isat-sam
+
+# 3. (可选) 安装自动标注插件
+pip install isat-plugin-auto-annotate
+
+## 主要依赖
+einops, ftfy, fuzzywuzzy, hydra-core, imgviz, iopath, numpy, opencv-python, pillow, pycocotools, pyqt5, torch, torchvision, timm, shapely, scikit-image 等
+
+## 启动
+
+conda activate isat_env
+isat-sam
+
