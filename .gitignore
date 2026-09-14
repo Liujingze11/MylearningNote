@@ -78,6 +78,7 @@ datasets/
 ultralytics_examples/
 YOLOX/
 **/bert-base-uncased/
+07_AI_Robot/microduck_rl/
 
 # Nested git repositories (keep local clone history, don't track)
 .git/
