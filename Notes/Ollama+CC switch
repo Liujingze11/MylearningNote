@@ -1,0 +1,127 @@
+# 安装 Ollama——Linux安装脚本
+curl -fsSL https://ollama.com/install.sh | sh  
+
+# 验证安装——查看版本号
+ollama --version 
+
+# 查看 ollama 服务是否运行
+systemctl status ollama
+如果显示：
+
+active (running)
+
+就说明 Ollama Server 已经启动了。
+
+# 拉取模型（仅下载到本地不运行）
+ollama pull qwen3:0.6b  
+
+# 下载并运行模型（交互式对话）
+ollama run qwen3:0.6b 
+
+
+
+# 启动 Claude 集成
+ollama launch claude --model qwen3:0.6b  # 使用 ollama 启动 claude 并指定模型
+
+# 手动方式W
+export ANTHROPIC_AUTH_TOKEN=ollama
+export ANTHROPIC_BASE_URL=http://localhost:11434
+
+claude --model qwen3-coder:30b
+
+
+# 验证 Ollama API通过 API 测试连接——发送 POST 请求测试 API，stream:false 表示一次性返回结果
+curl http://localhost:11434/api/chat \
+  -d '{
+    "model": "qwen3:0.6b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "你好，只回复一句：API连接成功"
+      }
+    ],
+    "stream": false
+  }'  
+
+
+如果返回类似：
+
+{
+  "model": "qwen3:0.6b",
+  "message": {
+    "role": "assistant",
+    "content": "API连接成功"
+  }
+}
+ollama list
+
+curl http://127.0.0.1:11434/api/tags
+
+printf 'FROM qwen3-coder:30b\nPARAMETER num_ctx 32768\n' > ~/Modelfile-qwen3coder-32k && ollama create qwen3-coder:30b-32k -f ~/Modelfile-qwen3coder-32k && ollama list
+
+结论：**CC Switch 中的 `qwen3-coder:30b-32k` 配置是正确的，而且已经能够正常调用工具。**
+
+配置关系如下：
+
+```text
+Claude Code
+→ CC Switch 写入 ~/.claude/settings.json
+→ http://127.0.0.1:11434
+→ 本机 Ollama
+→ qwen3-coder:30b-32k
+```
+
+之所以填写：
+
+```text
+http://127.0.0.1:11434
+```
+
+是因为：
+
+- `127.0.0.1` 代表你当前这台电脑。
+- `11434` 是 Ollama 默认 API 端口。
+- Ollama 正在该地址监听。
+- Claude Code 会自动将请求发送到 `/v1/messages`。
+- CC Switch 当前没有开启自己的代理，而是让 Claude Code 直接连接 Ollama。
+
+你在 CC Switch 中应该这样配置：
+
+```text
+供应商名称：qwen3-coder:30b-32k
+API 格式：Anthropic
+API 地址：http://127.0.0.1:11434
+API Token：ollama
+模型名称：qwen3-coder:30b-32k
+```
+
+Opus、Sonnet、Haiku、默认模型和子代理模型都设置为：
+
+```text
+qwen3-coder:30b-32k
+```
+
+这是因为 Claude Code 在不同任务中可能调用不同模型角色；全部映射到本地模型，可以避免它请求并不存在的官方 Claude 模型。
+
+注意，CC Switch 中应填写纯文本地址：
+
+```text
+http://127.0.0.1:11434
+```
+
+不要填写聊天界面显示的 Markdown 格式：
+
+```text
+[http://127.0.0.1:11434](http://127.0.0.1:11434)
+```
+
+当前实际状态：
+
+- 32K 模型已经创建并正常加载。
+- Ollama 的实际上下文长度是 `32768`。
+- Claude Code 可以正常对话。
+- Bash 工具调用已经成功验证。
+- 先前没有调用工具，是模型当时选择直接回答，并非 32K 模型不支持工具。
+- 配置中 `127.0.0.1:23333` 的 hooks 属于 Clawd on Desk，和 Ollama 的 `11434` 接口无关。
+
+因此，**目前无需因为工具调用问题修改这个 Ollama 请求地址或重新创建模型**。
