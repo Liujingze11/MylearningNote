@@ -115,7 +115,6 @@ for d in (VIS_DIR, OUT_IMAGE_DIR, OUT_LABEL_DIR):
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"设备: {device} | 权重: {CHECKPOINT_PATH.name} ({CHECKPOINT_PATH.stat().st_size / 1e9:.2f} GB)")
 
-load_start = time.time()
 model = build_sam3_image_model(
     checkpoint_path=str(CHECKPOINT_PATH),
     load_from_HF=False,
@@ -129,7 +128,7 @@ processor = Sam3Processor(
     confidence_threshold=CONFIDENCE,
 )
 
-print(f"模型加载完成 ({time.time() - load_start:.1f}s)，开始推理\n")
+print("模型加载完成，开始推理\n")
 
 
 # =========================

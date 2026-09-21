@@ -144,7 +144,6 @@ def main() -> None:
     device = "cuda" if torch.cuda.is_available() else "cpu"
     log(f"设备: {device} | 权重: {CHECKPOINT_PATH.name} ({CHECKPOINT_PATH.stat().st_size / 1e9:.2f} GB)")
 
-    load_start = time.time()
     model = build_sam3_image_model(
         checkpoint_path=str(CHECKPOINT_PATH),
         load_from_HF=False,
@@ -158,7 +157,7 @@ def main() -> None:
         confidence_threshold=CONFIDENCE,
     )
 
-    log(f"模型加载完成 ({time.time() - load_start:.1f}s)，开始推理\n")
+    log("模型加载完成，开始推理\n")
 
     # =========================
     # 4. 循环推理
