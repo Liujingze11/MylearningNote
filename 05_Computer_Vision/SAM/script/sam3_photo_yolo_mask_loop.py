@@ -30,7 +30,7 @@ OUT_IMAGE_DIR = OUTPUT_DIR / "images"  # 原图拷贝
 OUT_LABEL_DIR = OUTPUT_DIR / "labels"  # YOLO-seg 标注
 
 PROMPT = "objects on a white table"
-CONFIDENCE = 0.4
+CONFIDENCE = 0.5
 CLASS_ID = 1          # 唯一类别 ID
 POLY_EPSILON = 1.0    # approxPolyDP 多边形简化精度（像素）
 

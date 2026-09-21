@@ -31,7 +31,7 @@ OUT_IMAGE_DIR = OUTPUT_DIR / "images"  # 原图拷贝（供训练）
 OUT_LABEL_DIR = OUTPUT_DIR / "labels"  # YOLO-seg 标注
 
 PROMPT = "objects on a white table"
-CONFIDENCE = 0.4
+CONFIDENCE = 0.45
 
 CLASS_ID = 1          # 唯一类别 ID（ISAT 默认 __background__ 为 0）
 IOU_THRESH = 0.8      # 重复 mask 去重：IoU 超过该值只保留置信度高的
