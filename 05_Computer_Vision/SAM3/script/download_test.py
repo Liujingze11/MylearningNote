@@ -1,7 +1,6 @@
 import os
 import subprocess
 import threading
-import time
 from pathlib import Path
 
 from huggingface_hub import hf_hub_download
@@ -17,7 +16,7 @@ CHECKPOINT_PATH = BASE_DIR / MODEL
 # ==========================
 
 def download_with_hf_hub(repo, timeout=10):
-    """用 huggingface_hub 下载，timeout 秒无响应则放弃"""
+    """用 huggingface_hub 下载"""
 
     print(f"[官方] 尝试 hf_hub_download: {repo}")
 
@@ -28,15 +27,19 @@ def download_with_hf_hub(repo, timeout=10):
         nonlocal result, error
         try:
             result = hf_hub_download(
-                repo_id=repo,
-                filename=MODEL,
-                local_dir=str(BASE_DIR),
-                etag_timeout=timeout,
+                repo_id=repo,          # Hugging Face 仓库
+                filename=MODEL,        # 下载 sam3.pt
+                local_dir=str(BASE_DIR), # 保存到当前脚本目录
+                etag_timeout=timeout,  # 获取文件信息时的超时时间
             )
         except Exception as e:
-            error = e
+            error = e                 # 下载出错时，把错误保存下来
 
-    thread = threading.Thread(target=worker, daemon=True)
+    thread = threading.Thread(
+        target=worker,   # 让这个线程去执行 worker() 下载
+        daemon=True      # 主程序结束时，这个线程也跟着结束
+    )
+
     thread.start()
     thread.join(timeout=timeout + 5)  # 多等 5 秒给网络缓冲
 

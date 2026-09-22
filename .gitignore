@@ -71,6 +71,7 @@ datasets/
 
 # ML experiment outputs
 **/experiments/
+**/experiment_logs/
 **/frames/
 **/output/
 
@@ -80,6 +81,11 @@ YOLOX/
 **/bert-base-uncased/
 07_AI_Robot/microduck_rl/
 05_Computer_Vision/SAM/sam3/
+05_Computer_Vision/SAM3/sam3/
+
+# Data and personal files
+*.xlsx
+**/output_loop_plus/
 
 # Nested git repositories (keep local clone history, don't track)
 .git/
